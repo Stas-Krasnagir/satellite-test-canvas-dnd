@@ -1,0 +1,26 @@
+.canvas_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  border: 2px solid black;
+  box-sizing: border-box
+}
+
+.App_container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn {
+  flex-direction: row;
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+}
