@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { observer } from "mobx-react-lite";
 import canvasState from "../Store/canvasState";
+import { myStorage, addItem, getItems } from "./LocaStorage";
 
 const WIDTH = 1000;
 const HEIGHT = 550;
@@ -28,50 +29,16 @@ const Canvas = observer(() => {
 
     //================================
 
-    let myStorage = window.localStorage;
-    function addItem(item) {
-      let lastValue = myStorage.getItem('canvas')
-      myStorage.clear()
-      if (lastValue !== null) {
-        let tmp = JSON.parse(lastValue)
-        tmp.push(item)
-        myStorage.setItem('canvas', JSON.stringify(tmp))
-      }
-      else {
-        let res = []
-        res.push(item)
-        myStorage.setItem('canvas', JSON.stringify(res))
-      }
-    };
-    function getItems() {
-      return JSON.parse(myStorage.getItem('canvas'))
-    }
-
-    //================================
-
     canvasState.canvas.onmousemove = function (e) {
       mouse.x = e.pageX - e.target.offsetLeft;
       mouse.y = e.pageY - e.target.offsetTop
 
       if (activeDrawRect) {
-        newRect = {
-          type: "rect",
-          x: mouse.x - 50,
-          y: mouse.y - 50,
-          w: 100,
-          h: 100,
-          stroke: true
-        }
+        newRect = { type: "rect", x: mouse.x - 50, y: mouse.y - 50, w: 100, h: 100, stroke: true }
       }
 
       if (activeDrawCircle) {
-        newCircle = {
-          type: "circle",
-          x: mouse.x,
-          y: mouse.y,
-          r: 50,
-          stroke: true
-        };
+        newCircle = { type: "circle", x: mouse.x, y: mouse.y, r: 50, stroke: true };
       }
     }
 
